@@ -12,6 +12,12 @@
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
+    "typescriptServerPlugins": [
+      {
+        "name": "references-without-definition-plugin",
+        "enableForWorkspaceTypeScriptVersions": true
+      }
+    ],
     "commands": [
       {
         "command": "hightlight-errors.helloWorld",
@@ -20,19 +26,11 @@
       {
         "command": "highlight-errors.executeCodeAction",
         "title": "Print Code Actions"
-      },
-      {
-        "command": "highlight-errors.goToReferences",
-        "title": "My Go to References"
-      },
-      {
-        "command": "highlight-errors.smartGoto",
-        "title": "Smart Goto Definition/References"
       }
     ]
   },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
+    "vscode:prepublish": "npm run compile && cp -r ./references-without-definition-plugin ./node_modules",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
